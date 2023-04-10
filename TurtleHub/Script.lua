@@ -31,7 +31,7 @@ Farm:AddToggle({
          
          while _G.Muscle do
          local args = {
-    [1] = "Weight1"
+    [1] = game:GetService("Workspace").LocalPlayer["Weight"].Name
 }
 
 game:GetService("ReplicatedStorage").Events.Weight:FireServer(unpack(args))
