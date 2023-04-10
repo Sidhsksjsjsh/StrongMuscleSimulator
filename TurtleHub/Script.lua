@@ -3,19 +3,19 @@ local OrionLib = loadstring(game:HttpGet("https://pastebin.com/raw/NMEHkVTb"))()
 local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = false, SaveConfig = true, ConfigFolder = "TurtleFi"})
 
 local Farm = Window:MakeTab({
-Name = "Main | Farm",
+Name = "Main",
 Icon = "rbxassetid://13043177474",
 PremiumOnly = false
 })
 
 local Egg = Window:MakeTab({
-Name = "Egg | Coming Soon!",
+Name = "Egg",
 Icon = "rbxassetid://13040484705",
 PremiumOnly = false
 })
 
 local Zone = Window:MakeTab({
-Name = "Zone | Coming Soon!",
+Name = "Zone",
 Icon = "rbxassetid://13040484705",
 PremiumOnly = false
 })
@@ -35,6 +35,7 @@ Farm:AddToggle({
 }
 
 game:GetService("ReplicatedStorage").Events.Weight:FireServer(unpack(args))
+wait(0.5)
         end
     end    
  })
@@ -52,6 +53,7 @@ game:GetService("ReplicatedStorage").Events.Weight:FireServer(unpack(args))
 }
 
 game:GetService("ReplicatedStorage").Skills.CombatFolder.RemoteEvent:FireServer(unpack(args))
+wait(0.5)
         end
     end    
  })
@@ -80,6 +82,7 @@ end
 
 game:GetService("ReplicatedStorage").Skills.CombatFolder.RemoteEvent:FireServer(unpack(args))
 SyncRandomEasterEgg()
+wait(0.5)
         end
     end    
  })
@@ -122,6 +125,7 @@ game:GetService("ReplicatedStorage").Events.SkillToggle:FireServer(unpack(args))
          
          while _G.Spin do
          game:GetService("ReplicatedStorage").Events:FindFirstChild("Spin Wheel"):FireServer()
+         wait(0.5)
          end
     end    
  })
