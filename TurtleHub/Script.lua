@@ -4,13 +4,13 @@ local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = fa
 
 local Farm = Window:MakeTab({
 Name = "Main",
-Icon = "rbxassetid://13043177474",
+Icon = "rbxassetid://13040495457",
 PremiumOnly = false
 })
 
 local Egg = Window:MakeTab({
 Name = "Egg",
-Icon = "rbxassetid://13040484705",
+Icon = "rbxassetid://13040495457",
 PremiumOnly = false
 })
 
@@ -126,6 +126,73 @@ game:GetService("ReplicatedStorage").Events.SkillToggle:FireServer(unpack(args))
          while _G.Spin do
          game:GetService("ReplicatedStorage").Events:FindFirstChild("Spin Wheel"):FireServer()
          wait(0.5)
+         end
+    end    
+ })
+ 
+ _G.Rebirth = false
+ Farm:AddToggle({
+     Name = "Auto Rebirth",
+     Default = false,
+     Callback = function(Value)
+         _G.Rebirth = Value
+         
+         while _G.Rebirth do
+         game:GetService("ReplicatedStorage").Events.Rebirth:FireServer()
+         wait(0.5)
+         end
+    end    
+ })
+ 
+ local SyncEgg = {}
+for _,SyncEggScript in pairs(game:GetService("Workspace").Eggs:GetChildren()) do
+    table.insert(SyncEgg, SyncEggScript.Name)
+end
+
+local AsyncEggServer = ""
+Egg:AddDropdown({
+     Name = "Select Egg",
+     Default = "",
+     Options = SyncEgg,
+     Callback = function(Value)
+         AsyncEggServer = Value
+   end    
+})
+
+_G.Hatch = false
+Egg:AddToggle({
+     Name = "Auto Hatch (1X)",
+     Default = false,
+     Callback = function(Value)
+         _G.Hatch = Value
+         
+         while _G.Hatch do
+         local args = {
+    [1] = AsyncEggServer,
+    [2] = 1
+}
+
+game:GetService("ReplicatedStorage").Events.HatchEgg:InvokeServer(unpack(args))
+         wait()
+         end
+    end    
+ })
+ 
+ _G.Triple = false
+ Egg:AddToggle({
+     Name = "Auto Hatch (3X)",
+     Default = false,
+     Callback = function(Value)
+         _G.Triple = Value
+         
+         while _G.Triple do
+         local args = {
+    [1] = AsyncEggServer,
+    [2] = 3
+}
+
+game:GetService("ReplicatedStorage").Events.HatchEgg:InvokeServer(unpack(args))
+         wait()
          end
     end    
  })
